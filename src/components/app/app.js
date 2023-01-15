@@ -102,12 +102,9 @@ class App extends Component {
    onSalaryChange = (name, salary) => {
       this.setState((state) => ({
          data: state.data.map(item => {
-             if(item.name === name) {
-                 return {...item, salary}
-             }
-             return item;
+            return { ...item, salary }
          })
-     }))
+      }))
    }
 
    render() {
@@ -122,13 +119,14 @@ class App extends Component {
 
             <div className="search-panel">
                <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-               <AppFilter filter={filter} onFilterSelect={this.onFilterSelect} onSalaryChange={this.onSalaryChange} />
+               <AppFilter filter={filter} onFilterSelect={this.onFilterSelect} />
             </div>
 
             <EmployersList
                data={visibleData}
                onDelete={this.deleteItem}
-               onToggleProp={this.onToggleProp} />
+               onToggleProp={this.onToggleProp}
+               onSalaryChange={this.onSalaryChange} />
             <EmployersAddForm onAdd={this.addItem} />
          </div>
       )
